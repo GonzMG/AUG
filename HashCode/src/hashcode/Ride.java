@@ -5,10 +5,6 @@
  */
 package hashcode;
 
-/**
- *
- * @author juanpamz
- */
 public class Ride {
     private int x0;
     private int x1;
