@@ -10,18 +10,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- * @author gonzalo
- */
 public class Code {
-    public int[][] m_data;          // Matrix with ride input data
     public int row;
     public int column;
     public int vehicles;
     //public int rides;
     public int bonus;
-    public int steps;
+    public int max_steps;
+    public int steps = 0;
     public ArrayList<Ride> rides;
     public ArrayList<Car> cars;
     
@@ -50,7 +46,7 @@ public class Code {
                     vehicles = Integer.parseInt(finput[2]);
                     //rides = Integer.parseInt(finput[3]);
                     bonus = Integer.parseInt(finput[4]);
-                    steps = Integer.parseInt(finput[5]);
+                    max_steps = Integer.parseInt(finput[5]);
                     
                     //Add car to cars
                     for(int z = 0; z < vehicles; z++){
@@ -83,4 +79,6 @@ public class Code {
             System.out.println("ERROR");
         }
     }
+    
+     
 }
