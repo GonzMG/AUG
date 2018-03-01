@@ -26,6 +26,7 @@ public class Car {
         this.x = x;
         this.y = y;
         this.total_time = total_time;
+        busy=false;
     }
     public int getX(){
         return x;

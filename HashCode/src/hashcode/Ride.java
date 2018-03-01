@@ -5,6 +5,8 @@
  */
 package hashcode;
 
+import static java.lang.Math.abs;
+
 public class Ride {
     private int x0;
     private int x1;
@@ -22,10 +24,10 @@ public class Ride {
         latestFinish = 0;
     }
     public Ride(int x0, int y0, int x1, int y1, int earliestStart, int latestFinish){
-        this.x0=0;
-        this.x1=0;
-        this.y0=0;
-        this.y1=0;
+        this.x0=x0;
+        this.y0=y0;
+        this.x1=x1;
+        this.y1=y1;
         this.earliestStart = earliestStart;
         this.latestFinish = latestFinish;
     }
@@ -48,4 +50,11 @@ public class Ride {
     public int getLatestFinish(){
         return latestFinish;
     }  
+    public int getPasos(int carX, int carY){
+        int pasos = abs(carX-this.x0)+abs(carY-this.y0);
+        if(earliestStart >= pasos){
+            pasos = earliestStart;
+        }
+        return pasos;
+    }
 }

@@ -14,5 +14,8 @@ public class HashCode {
         Code code = new Code();
         String fname = "a_example.in";
         code.readFile(fname);
+        
+        code.getTimeCar();
+        code.assignCarToRide();
     }  
 }

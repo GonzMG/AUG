@@ -20,12 +20,13 @@ public class Code {
     public int steps = 0;
     public ArrayList<Ride> rides;
     public ArrayList<Car> cars;
+    public ArrayList<Integer> cocheLleva;
     
     public void readFile(String fname){
         BufferedReader br = null;
         FileReader fr = null;
         rides = new ArrayList<>();
-        
+        cars = new ArrayList<>();
         // rows, columns, vehicles, rides, bonus, steps
         // o_x, o_y, f_x, f_y, start, finish
         
@@ -48,10 +49,6 @@ public class Code {
                     bonus = Integer.parseInt(finput[4]);
                     max_steps = Integer.parseInt(finput[5]);
                     
-                    //Add car to cars
-                    for(int z = 0; z < vehicles; z++){
-                        cars.add(new Car());
-                    }
                     
                 }else{
                     int xi;
@@ -74,6 +71,12 @@ public class Code {
                     Ride ride = new Ride(xi, yi, xf, yf, early, latest);
                     rides.add(ride);
                 }
+                i++;
+            }
+            //Add car to cars
+            for(int z = 0; z < vehicles; z++){
+                System.out.println("IM");
+                cars.add(new Car());
             }
         }catch(IOException e){
             System.out.println("ERROR");
@@ -81,15 +84,47 @@ public class Code {
     }
     
     public void  getTimeCar(){
+        System.out.println(rides.size());
         for(Car c: cars){
             for(Ride r: rides){
                 if (c.busy == false){
-                    c.total_time.add(getPasos(c.x, c.y));
+                    c.total_time.add(r.getPasos(c.getX(), c.getY()));
                 }
                 else{
                     c.total_time.add(-1);
                 }
             }
         }
+        
+        for(Car c: cars){
+            System.out.println("-------------------");
+            System.out.println("Car total times");
+            for(int i = 0; i < c.total_time.size(); i++){
+                System.out.println(c.total_time.get(i) + " ");
+            }
+        }
+    }
+    
+    public void assignCarToRide(){
+        cocheLleva=new ArrayList<>();
+        for(int i=0; i< rides.size(); i++){
+            int cocheAsignado=-1;
+            
+            for(int j=0;j<cars.size();j++){
+                if(!cars.get(j).busy){
+                    int minVal=Integer.MAX_VALUE;
+                    if(cars.get(j).total_time.get(i)<minVal){
+                        minVal = cars.get(j).total_time.get(i);
+                        cocheAsignado=j;
+                    }
+                }
+            }
+            if(cocheAsignado != -1){
+                cars.get(cocheAsignado).busy=true;
+            }
+            cocheLleva.add(cocheAsignado);
+            System.out.println("Ride:"+i+" Coche:"+cocheAsignado);
+        }
+        
     }
 }
