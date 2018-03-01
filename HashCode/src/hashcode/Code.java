@@ -82,8 +82,13 @@ public class Code {
     
     public void  getTimeCar(){
         for(Car c: cars){
-            if (c.busy == false){
-                
+            for(Ride r: rides){
+                if (c.busy == false){
+                    c.total_time.add(getPasos(c.x, c.y));
+                }
+                else{
+                    c.total_time.add(-1);
+                }
             }
         }
     }
