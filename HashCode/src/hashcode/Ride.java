@@ -14,6 +14,8 @@ public class Ride {
     private int y1;
     private int earliestStart;
     private int latestFinish;
+    public boolean ocupado;
+    public int ridePasos;
     
     public Ride(){
         x0=0;
@@ -22,6 +24,8 @@ public class Ride {
         y1=0;
         earliestStart = 0;
         latestFinish = 0;
+        ocupado = false;
+        ridePasos = abs(this.x1-this.x0)+abs(this.y1-this.y0);
     }
     public Ride(int x0, int y0, int x1, int y1, int earliestStart, int latestFinish){
         this.x0=x0;
@@ -30,6 +34,8 @@ public class Ride {
         this.y1=y1;
         this.earliestStart = earliestStart;
         this.latestFinish = latestFinish;
+        ocupado=false;
+        ridePasos = abs(this.x1-this.x0)+abs(this.y1-this.y0);
     }
     
     public int getX0(){

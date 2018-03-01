@@ -6,8 +6,11 @@
 package hashcode;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class Code {
@@ -106,25 +109,62 @@ public class Code {
     }
     
     public void assignCarToRide(){
+        
         cocheLleva=new ArrayList<>();
-        for(int i=0; i< rides.size(); i++){
-            int cocheAsignado=-1;
-            
-            for(int j=0;j<cars.size();j++){
-                if(!cars.get(j).busy){
-                    int minVal=Integer.MAX_VALUE;
-                    if(cars.get(j).total_time.get(i)<minVal){
-                        minVal = cars.get(j).total_time.get(i);
-                        cocheAsignado=j;
+        while(steps < max_steps && cocheLleva.size() != rides.size()){
+            for(int i=0; i< rides.size(); i++){
+                if(!rides.get(i).ocupado){
+                    int cocheAsignado=-1;
+                    for(int j=0;j<cars.size();j++){
+                        if(!cars.get(j).busy){
+                            int minVal=Integer.MAX_VALUE;
+                            if(cars.get(j).total_time.get(i)<minVal){
+                                minVal = cars.get(j).total_time.get(i);
+                                cocheAsignado=j;
+                            }
+                        }
+                    }
+                    if(cocheAsignado != -1){
+                        cars.get(cocheAsignado).busy=true;
+                        rides.get(i).ocupado = true;
+                        cocheLleva.add(cocheAsignado);
+                    }
+                    System.out.println("Ride:"+i+" Coche:"+cocheAsignado);
+                }else{
+                    
+                    rides.get(i).ridePasos-=1;
+                    if(rides.get(i).ridePasos==0){
+                        for(int xx=0; xx<cocheLleva.size();xx++){
+                            if(cocheLleva.get(xx) == i){
+                                cars.get(xx).busy=false;
+                            }
+                        }
                     }
                 }
             }
-            if(cocheAsignado != -1){
-                cars.get(cocheAsignado).busy=true;
-            }
-            cocheLleva.add(cocheAsignado);
-            System.out.println("Ride:"+i+" Coche:"+cocheAsignado);
+            //System.out.println("SIZE:"+cocheLleva.size());
+            steps++;
         }
-        
+        System.out.println(cocheLleva);
+    }
+    
+    public void imprimirFichero() throws FileNotFoundException, UnsupportedEncodingException{
+        PrintWriter writer = new PrintWriter("archivoOut.txt", "UTF-8");
+        for(int i = 0; i < cars.size(); i++){
+            //
+            
+            writer.print(i+1 + " ");
+            for(int j=0;j<cocheLleva.size();j++){
+                for(int xx=0; xx<cocheLleva.size();xx++){
+                    if(cocheLleva.get(xx) == i){
+                        writer.print(xx + " ");
+                    }
+                }
+            }
+            
+            
+            //
+        }
+        writer.close();
     }
 }
