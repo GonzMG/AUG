@@ -14,10 +14,15 @@ public class HashCode {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String fname = "prueba.in";
+        readFile(fname);
+    }
+    
+    public static void readFile(String fname){
         BufferedReader br = null;
         FileReader fr = null;
         
-        String fname = "";
+        //String fname = "prueba.in";
         
         try {
             fr = new FileReader(fname);
