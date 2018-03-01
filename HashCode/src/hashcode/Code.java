@@ -80,5 +80,11 @@ public class Code {
         }
     }
     
-     
+    public void  getTimeCar(){
+        for(Car c: cars){
+            if (c.busy == false){
+                
+            }
+        }
+    }
 }

@@ -15,10 +15,12 @@ public class Car {
     private int x;
     private int y;
     ArrayList<Integer> total_time;
+    boolean busy;
     public Car(){
         x = 0;
         y = 0;
         total_time = new ArrayList<Integer>();
+        busy = false;
     }
     public Car(int x, int y, ArrayList<Integer> total_time){
         this.x = x;
@@ -43,5 +45,4 @@ public class Car {
     public void setRides(ArrayList<Integer> total_time){
         this.total_time=total_time;
     }
-    
 }
